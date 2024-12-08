@@ -45,7 +45,6 @@ export function mapToResumeValues(data: ResumeServerData): ResumeValues {
       endDate: edu.endDate?.toISOString().split("T")[0],
     })),
     skills: data.skills,
-    // commit
     borderStyle: data.borderStyle,
     colorHex: data.colorHex,
     summary: data.summary || undefined,
