@@ -7,8 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import Card from "./FeatureCards";
 import { Cover } from "@/components/ui/cover";
-import { Compare } from "@/components/ui/compare";
-
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -78,116 +76,6 @@ export default function Home() {
             </motion.button>
           </Link>
         </motion.div>
-      </section>
-
-      {/* Feature Sections */}
-      <section className="scroll-section flex flex-col items-center px-4 py-20 md:flex-row md:px-20">
-        <motion.div
-          className="mb-10 md:mb-0 md:w-1/2"
-          whileInView={{ x: [-100, 0], opacity: [0, 1] }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="flex h-[80vh] w-4/5 items-center justify-center px-1 [perspective:800px] [transform-style:preserve-3d] md:px-8">
-            <div
-              style={{
-                transform: "rotateX(10deg) translateZ(120px)",
-              }}
-              className="mx-auto h-1/2 w-3/4 rounded-3xl border border-neutral-200 bg-neutral-100 p-1 dark:border-neutral-800 dark:bg-neutral-900 md:h-3/4 md:p-4"
-            >
-              <Compare
-                firstImage="https://assets.aceternity.com/notes-dark.png"
-                secondImage="https://assets.aceternity.com/linear-dark.png"
-                firstImageClassName="object-cover object-left-top w-full"
-                secondImageClassname="object-cover object-left-top w-full"
-                className="h-full w-full rounded-[22px] md:rounded-lg"
-                slideMode="hover"
-                autoplay={true}
-              />
-            </div>
-          </div>
-        </motion.div>
-        <div className="md:w-1/2 md:pl-20">
-          <h2 className="mb-6 text-4xl font-bold text-white">
-            Professional Templates
-          </h2>
-          <p className="text-lg text-gray-300">
-            Choose from our collection of professionally designed templates that
-            stand out
-          </p>
-        </div>
-      </section>
-
-      <section className="scroll-section flex flex-col items-center px-4 py-20 md:flex-row-reverse md:px-20">
-        <motion.div
-          className="mb-10 md:mb-0 md:w-1/2"
-          whileInView={{ x: [100, 0], opacity: [0, 1] }}
-          transition={{ duration: 0.8 }}
-        >
-          <img
-            src="icon.png"
-            alt="Easy Customization"
-            width={600}
-            height={400}
-            className="rounded-lg shadow-xl"
-          />
-        </motion.div>
-        <div className="md:w-1/2 md:pr-20">
-          <h2 className="mb-6 text-4xl font-bold text-white">
-            Easy Customization
-          </h2>
-          <p className="text-lg text-gray-300">
-            Customize every aspect of your resume with our intuitive editor
-          </p>
-        </div>
-      </section>
-
-      <section className="scroll-section flex flex-col items-center px-4 py-20 md:flex-row md:px-20">
-        <motion.div
-          className="mb-10 md:mb-0 md:w-1/2"
-          whileInView={{ x: [-100, 0], opacity: [0, 1] }}
-          transition={{ duration: 0.8 }}
-        >
-          <img
-            src="icon.png"
-            alt="AI Powered"
-            width={600}
-            height={400}
-            className="rounded-lg shadow-xl"
-          />
-        </motion.div>
-        <div className="md:w-1/2 md:pl-20">
-          <h2 className="mb-6 text-4xl font-bold text-white">
-            AI-Powered Suggestions
-          </h2>
-          <p className="text-lg text-gray-300">
-            Get intelligent suggestions to improve your resume content
-          </p>
-        </div>
-      </section>
-
-      <section className="scroll-section flex flex-col items-center px-4 py-20 md:flex-row-reverse md:px-20">
-        <motion.div
-          className="mb-10 md:mb-0 md:w-1/2"
-          whileInView={{ x: [100, 0], opacity: [0, 1] }}
-          transition={{ duration: 0.8 }}
-        >
-          <img
-            src="icon.png"
-            alt="Export Options"
-            width={600}
-            height={400}
-            className="rounded-lg shadow-xl"
-          />
-        </motion.div>
-        <div className="md:w-1/2 md:pr-20">
-          <h2 className="mb-6 text-4xl font-bold text-white">
-            Multiple Export Options
-          </h2>
-          <p className="text-lg text-gray-300">
-            Download your resume in multiple formats including PDF, Word, and
-            more
-          </p>
-        </div>
       </section>
       <Card />
     </main>
