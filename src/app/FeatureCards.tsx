@@ -39,7 +39,7 @@ export default function FeatureCards() {
   };
 
   return (
-    <div className="w-full px-4 py-16 md:px-8">
+    <div className="w-full px-4 py-16 md:px-8 lg:min-h-[80vh] min-h-screen">
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
         <motion.div
@@ -51,12 +51,7 @@ export default function FeatureCards() {
           <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl lg:text-5xl">
             Build Your Perfect Resume
           </h2>
-          <p className="text-base text-gray-400 md:text-lg">
-            Choose the perfect tool to create your professional story
-          </p>
         </motion.div>
-
-        {/* Cards Container */}
         <div
           ref={cardsRef}
           className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
@@ -82,27 +77,19 @@ export default function FeatureCards() {
                 />
               </svg>
             </div>
-            <h3 className="mb-4 text-xl font-bold text-white md:text-2xl">
-              AI-Powered Templates
-            </h3>
-            <p className="mb-6 text-sm text-gray-400 md:text-base">
-              Smart templates that adapt to your content and professional level.
-              Get personalized suggestions for improvement.
+            <h3 className="mb-4 text-2xl font-bold text-white">ATS Friendly</h3>
+            <p className="mb-6 text-gray-400">
+              Our tool ensures your resume is optimized for Applicant Tracking
+              Systems (ATS), making it easier for recruiters to find your
+              profile.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full rounded-lg bg-gradient-to-r from-purple-500 to-purple-600 px-6 py-2 font-medium text-white"
-            >
-              Explore Templates
-            </motion.button>
           </motion.div>
 
           {/* Card 2 */}
           <motion.div
             variants={cardVariants}
             whileHover="hover"
-            className="feature-card rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-900 to-gray-800 p-6 shadow-lg md:p-8"
+            className="feature-card rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-900 to-gray-800 p-8 shadow-xl backdrop-blur-sm"
           >
             <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-500/10">
               <svg
@@ -119,27 +106,20 @@ export default function FeatureCards() {
                 />
               </svg>
             </div>
-            <h3 className="mb-4 text-xl font-bold text-white md:text-2xl">
+            <h3 className="mb-4 text-2xl font-bold text-white">
               Real-Time Editor
             </h3>
-            <p className="mb-6 text-sm text-gray-400 md:text-base">
+            <p className="mb-6 text-gray-400">
               Edit and preview your resume in real-time. Drag-and-drop sections,
               customize styles, and see instant results.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-2 font-medium text-white"
-            >
-              Start Editing
-            </motion.button>
           </motion.div>
 
           {/* Card 3 */}
           <motion.div
             variants={cardVariants}
             whileHover="hover"
-            className="feature-card rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-900 to-gray-800 p-6 shadow-lg md:p-8"
+            className="feature-card rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-900 to-gray-800 p-8 shadow-xl backdrop-blur-sm"
           >
             <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-pink-500/10">
               <svg
@@ -156,20 +136,12 @@ export default function FeatureCards() {
                 />
               </svg>
             </div>
-            <h3 className="mb-4 text-xl font-bold text-white md:text-2xl">
-              Export & Share
+            <h3 className="mb-4 text-2xl font-bold text-white">
+              Export & Print
             </h3>
-            <p className="mb-6 text-sm text-gray-400 md:text-base">
-              Export your resume in multiple formats (PDF, DOCX, HTML) or share
-              directly with recruiters via custom link.
+            <p className="mb-6 text-gray-400">
+              Export your resume in the PDF format also print resume directly.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full rounded-lg bg-gradient-to-r from-pink-500 to-pink-600 px-6 py-2 font-medium text-white"
-            >
-              Export Options
-            </motion.button>
           </motion.div>
         </div>
       </div>
