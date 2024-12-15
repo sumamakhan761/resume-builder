@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { BorderStyles } from "@/app/(main)/editor/BorderStyleButton";
 import useDimensions from "@/hooks/useDimensions";
 import { cn } from "@/lib/utils";
@@ -41,6 +41,7 @@ export default function ResumePreview({
       >
         <PersonalInfoHeader resumeData={resumeData} />
         <SummarySection resumeData={resumeData} />
+        <ProjectsSection resumeData={resumeData} />
         <WorkExperienceSection resumeData={resumeData} />
         <EducationSection resumeData={resumeData} />
         <SkillsSection resumeData={resumeData} />
@@ -154,6 +155,49 @@ function SummarySection({ resumeData }: ResumeSectionProps) {
   );
 }
 
+function ProjectsSection({ resumeData }: ResumeSectionProps) {
+  const { projects, colorHex } = resumeData;
+
+  const projectsNotEmpty = projects?.filter(
+    (pro) => Object.values(pro).filter(Boolean).length > 0,
+  );
+
+  if (!projectsNotEmpty?.length) return null;
+
+  return (
+    <>
+      <hr
+        className="border-2"
+        style={{
+          borderColor: colorHex,
+        }}
+      />
+      <div className="space-y-3">
+        <p
+          className="text-lg font-semibold"
+          style={{
+            color: colorHex,
+          }}
+        >
+          Projects
+        </p>
+        {projectsNotEmpty.map((pro, index) => (
+          <div key={index} className="break-inside-avoid space-y-1">
+            <div
+              className="flex items-center justify-between text-sm font-semibold"
+              style={{
+                color: colorHex,
+              }}
+            >
+              <span>{pro.title}</span>
+            </div>
+            <div className="whitespace-pre-line text-xs">{pro.description}</div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
 function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
   const { workExperiences, colorHex } = resumeData;
 
