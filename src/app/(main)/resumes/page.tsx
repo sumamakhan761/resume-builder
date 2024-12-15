@@ -35,8 +35,6 @@ export default async function Page() {
     }),
   ]);
 
-  // TODO: Check quota for non-premium users
-
   return (
     <main className="mx-auto w-full max-w-7xl space-y-6 px-3 py-6">
       <Button asChild className="mx-auto flex w-fit gap-2">

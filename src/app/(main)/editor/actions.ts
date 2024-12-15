@@ -11,7 +11,7 @@ export async function saveResume(values: ResumeValues) {
 
   console.log("received values", values);
 
-  const { photo, workExperiences, educations, ...resumeValues } =
+  const { photo, workExperiences,educations,projects, ...resumeValues } =
     resumeSchema.parse(values);
 
   const { userId } = await auth();
@@ -19,8 +19,6 @@ export async function saveResume(values: ResumeValues) {
   if (!userId) {
     throw new Error("User not authenticated");
   }
-
-  // TODO: Check resume count for non-premium users
 
   const existingResume = id
     ? await prisma.resume.findUnique({ where: { id, userId } })
@@ -55,6 +53,12 @@ export async function saveResume(values: ResumeValues) {
       data: {
         ...resumeValues,
         photoUrl: newPhotoUrl,
+        projects: {
+          deleteMany: {},
+          create: projects?.map((pro) => ({
+            ...pro
+          })),
+        },
         workExperiences: {
           deleteMany: {},
           create: workExperiences?.map((exp) => ({
@@ -80,6 +84,11 @@ export async function saveResume(values: ResumeValues) {
         ...resumeValues,
         userId,
         photoUrl: newPhotoUrl,
+        projects: {
+          create: projects?.map((pro) => ({
+            ...pro
+          })),
+        },
         workExperiences: {
           create: workExperiences?.map((exp) => ({
             ...exp,

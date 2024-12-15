@@ -28,6 +28,13 @@ export async function deleteResume(id: string) {
   }
 
   // Delete related work experiences
+  await prisma.projects.deleteMany({
+    where: {
+      resumeId: id,
+    },
+  });
+
+    // Delete related projects
   await prisma.workExperience.deleteMany({
     where: {
       resumeId: id,

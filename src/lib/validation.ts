@@ -32,6 +32,19 @@ export const personalInfoSchema = z.object({
 
 export type PersonalInfoValues = z.infer<typeof personalInfoSchema>;
 
+export const projectsSchema = z.object({
+  projects: z
+    .array(
+      z.object({
+        title: optionalString,
+        description: optionalString,
+      }),
+    )
+    .optional(),
+});
+
+export type ProjectsValues = z.infer<typeof projectsSchema>;
+
 export const workExperienceSchema = z.object({
   workExperiences: z
     .array(
@@ -79,6 +92,7 @@ export const resumeSchema = z.object({
   ...generalInfoSchema.shape,
   ...personalInfoSchema.shape,
   ...workExperienceSchema.shape,
+  ...projectsSchema.shape,
   ...educationSchema.shape,
   ...skillsSchema.shape,
   ...summarySchema.shape,
