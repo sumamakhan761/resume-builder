@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -7,11 +6,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { EditorFormProps } from "@/lib/types";
-import { cn } from "@/lib/utils";
-import { projectsSchema, ProjectsValues } from "@/lib/validation";
 import {
   closestCenter,
   DndContext,
@@ -29,20 +23,25 @@ import {
   useSortable,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
+import { EditorFormProps } from "@/lib/types";
+import { awardsSchema, AwardsValues } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { GripHorizontal } from "lucide-react";
 import { useEffect } from "react";
 import { useFieldArray, useForm, UseFormReturn } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { GripHorizontal } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
+import { CSS } from "@dnd-kit/utilities";
 
-export default function ProjectsForm({
+export default function AwardsForm({
   resumeData,
   setResumeData,
 }: EditorFormProps) {
-  const form = useForm<ProjectsValues>({
-    resolver: zodResolver(projectsSchema),
+  const form = useForm<AwardsValues>({
+    resolver: zodResolver(awardsSchema),
     defaultValues: {
-      projects: resumeData.projects || [],
+      awards: resumeData.awards || [],
     },
   });
 
@@ -52,7 +51,7 @@ export default function ProjectsForm({
       if (!isValid) return;
       setResumeData({
         ...resumeData,
-        projects: values.projects?.filter((pro) => pro !== undefined) || [],
+        awards: values.awards?.filter((aw) => aw !== undefined) || [],
       });
     });
     return unsubscribe;
@@ -60,7 +59,7 @@ export default function ProjectsForm({
 
   const { fields, append, remove, move } = useFieldArray({
     control: form.control,
-    name: "projects",
+    name: "awards",
   });
 
   const sensors = useSensors(
@@ -84,9 +83,9 @@ export default function ProjectsForm({
   return (
     <div className="mx-auto max-w-xl space-y-6">
       <div className="space-y-1.5 text-center">
-        <h2 className="text-2xl font-semibold">Projects</h2>
+        <h2 className="text-2xl font-semibold">Awards & Honors</h2>
         <p className="text-sm text-muted-foreground">
-          Add as many work Projects as you like.
+          Add as many Awards and Honors as you like.
         </p>
       </div>
       <Form {...form}>
@@ -102,7 +101,7 @@ export default function ProjectsForm({
               strategy={verticalListSortingStrategy}
             >
               {fields.map((field, index) => (
-                <ProjectsItem
+                <AwardsItem
                   id={field.id}
                   key={field.id}
                   index={index}
@@ -117,13 +116,11 @@ export default function ProjectsForm({
               type="button"
               onClick={() =>
                 append({
-                  title: "",
-                  description: "",
-                  github: "",
+                 awards:"",
                 })
               }
             >
-              Add Projects
+              Add Awards
             </Button>
           </div>
         </form>
@@ -131,15 +128,14 @@ export default function ProjectsForm({
     </div>
   );
 }
-
-interface ProjectsItemProps {
+interface AwardsItemProps {
   id: string;
-  form: UseFormReturn<ProjectsValues>;
+  form: UseFormReturn<AwardsValues>;
   index: number;
   remove: (index: number) => void;
 }
 
-function ProjectsItem({ id, form, index, remove }: ProjectsItemProps) {
+function AwardsItem({ id, form, index, remove }: AwardsItemProps) {
   const {
     attributes,
     listeners,
@@ -172,10 +168,10 @@ function ProjectsItem({ id, form, index, remove }: ProjectsItemProps) {
 
       <FormField
         control={form.control}
-        name={`projects.${index}.title`}
+        name={`awards.${index}.awards`}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>title</FormLabel>
+            <FormLabel>Awards & Hounrs</FormLabel>
             <FormControl>
               <Input {...field} autoFocus />
             </FormControl>
@@ -184,32 +180,6 @@ function ProjectsItem({ id, form, index, remove }: ProjectsItemProps) {
         )}
       />
 
-      <FormField
-        control={form.control}
-        name={`projects.${index}.description`}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Description</FormLabel>
-            <FormControl>
-              <Textarea {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={form.control}
-        name={`projects.${index}.github`}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Github Link</FormLabel>
-            <FormControl>
-              <Textarea {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
       <Button variant="destructive" type="button" onClick={() => remove(index)}>
         Remove
       </Button>

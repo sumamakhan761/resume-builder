@@ -6,6 +6,7 @@ import SkillsForm from "./forms/SkillsForm";
 import SummaryForm from "./forms/SummaryForm";
 import WorkExperienceForm from "./forms/WorkExperienceForm";
 import ProjectsForm from "./forms/ProjectsForm";
+import AwardsForm from "./forms/AwardsForm";
 
 export const steps: {
   title: string;
@@ -14,6 +15,11 @@ export const steps: {
 }[] = [
   { title: "General info", component: GeneralInfoForm, key: "general-info" },
   { title: "Personal info", component: PersonalInfoForm, key: "personal-info" },
+  {
+    title: "Education",
+    component: EducationForm,
+    key: "education",
+  },
   {
     title: "Projects",
     component: ProjectsForm,
@@ -25,18 +31,18 @@ export const steps: {
     key: "work-experience",
   },
   {
-    title: "Education",
-    component: EducationForm,
-    key: "education",
-  },
-  {
     title: "Skills",
     component: SkillsForm,
     key: "skill",
   },
   {
+    title: "Awards",
+    component: AwardsForm,
+    key: "awards",
+  },
+  {
     title: "Summary",
     component: SummaryForm,
     key: "summary",
-  },
+  }
 ];

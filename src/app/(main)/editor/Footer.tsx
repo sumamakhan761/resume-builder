@@ -28,9 +28,9 @@ export default function Footer({
   )?.key;
 
   return (
-    <footer className="w-full border-t px-3 py-5">
+    <footer className="w-full border-t px-3 py-4">
       <div className="mx-auto flex max-w-7xl flex-wrap justify-between gap-3">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-5">
           <Button
             variant="secondary"
             onClick={

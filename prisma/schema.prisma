@@ -32,10 +32,13 @@ model Resume {
   country     String?
   phone       String?
   email       String?
+  linkdin     String?
+  github      String?
 
   workExperiences WorkExperience[]
   projects        Projects[]
   educations      Education[]
+  awards          Awards[]
   skills          String[]
 
   createdAt DateTime @default(now())
@@ -66,6 +69,7 @@ model Projects {
 
   title    String?
   description String?
+  github     String?
 
   resumeId String
   resume   Resume @relation(fields: [resumeId], references: [id])
@@ -74,6 +78,18 @@ model Projects {
   updatedAt DateTime @updatedAt
 
   @@map("projects")
+}
+
+model Awards {
+  id String @id @default(cuid())
+
+  awards    String?
+
+  resumeId String
+  resume   Resume @relation(fields: [resumeId], references: [id])
+
+
+  @@map("awards")
 }
 
 model Education {

@@ -28,6 +28,8 @@ export const personalInfoSchema = z.object({
   country: optionalString,
   phone: optionalString,
   email: optionalString,
+  github: optionalString,
+  linkdin: optionalString,
 });
 
 export type PersonalInfoValues = z.infer<typeof personalInfoSchema>;
@@ -38,6 +40,7 @@ export const projectsSchema = z.object({
       z.object({
         title: optionalString,
         description: optionalString,
+        github: optionalString,
       }),
     )
     .optional(),
@@ -82,6 +85,18 @@ export const skillsSchema = z.object({
 
 export type SkillsValues = z.infer<typeof skillsSchema>;
 
+export const awardsSchema = z.object({
+  awards: z
+    .array(
+      z.object({
+        awards: optionalString,
+      }),
+    )
+    .optional(),
+});
+
+export type AwardsValues = z.infer<typeof awardsSchema>;
+
 export const summarySchema = z.object({
   summary: optionalString,
 });
@@ -95,6 +110,7 @@ export const resumeSchema = z.object({
   ...projectsSchema.shape,
   ...educationSchema.shape,
   ...skillsSchema.shape,
+  ...awardsSchema.shape,
   ...summarySchema.shape,
   colorHex: optionalString,
   borderStyle: optionalString,

@@ -11,8 +11,14 @@ export async function saveResume(values: ResumeValues) {
 
   console.log("received values", values);
 
-  const { photo, workExperiences,educations,projects, ...resumeValues } =
-    resumeSchema.parse(values);
+  const {
+    photo,
+    workExperiences,
+    educations,
+    projects,
+    awards,
+    ...resumeValues
+  } = resumeSchema.parse(values);
 
   const { userId } = await auth();
 
@@ -56,7 +62,13 @@ export async function saveResume(values: ResumeValues) {
         projects: {
           deleteMany: {},
           create: projects?.map((pro) => ({
-            ...pro
+            ...pro,
+          })),
+        },
+        awards: {
+          deleteMany: {},
+          create: awards?.map((aw) => ({
+            ...aw,
           })),
         },
         workExperiences: {
@@ -86,7 +98,12 @@ export async function saveResume(values: ResumeValues) {
         photoUrl: newPhotoUrl,
         projects: {
           create: projects?.map((pro) => ({
-            ...pro
+            ...pro,
+          })),
+        },
+        awards: {
+          create: awards?.map((aw) => ({
+            ...aw,
           })),
         },
         workExperiences: {

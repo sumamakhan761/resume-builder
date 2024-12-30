@@ -92,9 +92,9 @@ export default function Home() {
           <Image
             src={icon}
             alt="Export Options"
-            width={550}
-            height={400}
-            className="rounded-lg shadow-xl"
+            width={500}
+            height={450}
+            className="rounded-3xl shadow-2xl"
           />
         </motion.div>
         <div className="md:w-1/2 md:pr-20">
@@ -118,7 +118,7 @@ export default function Home() {
             alt="Export Options"
             width={600}
             height={400}
-            className="rounded-lg shadow-xl"
+            className="rounded-3xl shadow-2xl"
           />
         </motion.div>
         <div className="md:w-1/2 md:pr-20">
@@ -144,7 +144,7 @@ export default function Home() {
             alt="Export Options"
             width={600}
             height={400}
-            className="rounded-lg shadow-xl"
+            className="rounded-3xl shadow-2xl"
           />
         </motion.div>
         <div className="md:w-1/2 md:pr-20">

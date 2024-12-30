@@ -14,6 +14,22 @@ interface ResumePreviewProps {
   className?: string;
 }
 
+const getLinkName = (url?: string): string => {
+  if (!url) {
+    return "";
+  }
+
+  try {
+    const domain: string = new URL(url).hostname; // Extract hostname
+    if (domain.includes("github")) return "GitHub";
+    if (domain.includes("linkedin")) return "LinkedIn";
+    return "Link";
+  } catch (error) {
+    console.error("Invalid URL", error);
+    return "Unknown";
+  }
+};
+
 export default function ResumePreview({
   resumeData,
   contentRef,
@@ -41,9 +57,10 @@ export default function ResumePreview({
       >
         <PersonalInfoHeader resumeData={resumeData} />
         <SummarySection resumeData={resumeData} />
+        <EducationSection resumeData={resumeData} />
         <ProjectsSection resumeData={resumeData} />
         <WorkExperienceSection resumeData={resumeData} />
-        <EducationSection resumeData={resumeData} />
+        <AwardsSection resumeData={resumeData} />
         <SkillsSection resumeData={resumeData} />
       </div>
     </div>
@@ -64,6 +81,8 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
     country,
     phone,
     email,
+    linkdin,
+    github,
     colorHex,
     borderStyle,
   } = resumeData;
@@ -96,7 +115,7 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
           }}
         />
       )}
-      <div className="space-y-2.5">
+      <div className="space-t-2.5">
         <div className="space-y-1">
           <p
             className="text-3xl font-bold"
@@ -121,6 +140,15 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
           {country}
           {(city || country) && (phone || email) ? " • " : ""}
           {[phone, email].filter(Boolean).join(" • ")}
+          <br />
+          <a href={github} className="mr-2 text-sm">
+            {"    "}
+            {getLinkName(github)}
+          </a>
+          <a href={linkdin} className="text-sm">
+            {"    "}
+            {getLinkName(linkdin)}
+          </a>
         </p>
       </div>
     </div>
@@ -184,12 +212,18 @@ function ProjectsSection({ resumeData }: ResumeSectionProps) {
         {projectsNotEmpty.map((pro, index) => (
           <div key={index} className="break-inside-avoid space-y-1">
             <div
-              className="flex items-center justify-between text-sm font-semibold"
+              className="flex items-center text-sm font-semibold"
               style={{
                 color: colorHex,
               }}
             >
-              <span>{pro.title}</span>
+              <span> • {pro.title}</span>
+              <span>
+                <a href={pro.github} className="ml-8">
+                  {"    "}
+                  {getLinkName(pro.github)}
+                </a>
+              </span>
             </div>
             <div className="whitespace-pre-line text-xs">{pro.description}</div>
           </div>
@@ -232,7 +266,7 @@ function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
                 color: colorHex,
               }}
             >
-              <span>{exp.position}</span>
+              <span> • {exp.position}</span>
               {exp.startDate && (
                 <span>
                   {formatDate(exp.startDate, "MM/yyyy")} -{" "}
@@ -298,9 +332,51 @@ function EducationSection({ resumeData }: ResumeSectionProps) {
     </>
   );
 }
+function AwardsSection({ resumeData }: ResumeSectionProps) {
+  const { awards, colorHex } = resumeData;
+
+  const awardsNotEmpty = awards?.filter(
+    (edu) => Object.values(edu).filter(Boolean).length > 0,
+  );
+
+  if (!awardsNotEmpty?.length) return null;
+
+  return (
+    <>
+      <hr
+        className="border-2"
+        style={{
+          borderColor: colorHex,
+        }}
+      />
+      <div className="space-y-3">
+        <p
+          className="text-lg font-semibold"
+          style={{
+            color: colorHex,
+          }}
+        >
+          Awards and Honors
+        </p>
+        {awardsNotEmpty.map((aw, index) => (
+          <div key={index} className="break-inside-avoid space-y-1">
+            <div
+              className="flex items-center justify-between text-sm font-semibold"
+              style={{
+                color: colorHex,
+              }}
+            >
+              <span> • {aw.awards}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
 
 function SkillsSection({ resumeData }: ResumeSectionProps) {
-  const { skills, colorHex, borderStyle } = resumeData;
+  const { skills, colorHex } = resumeData;
 
   if (!skills?.length) return null;
 
@@ -321,21 +397,9 @@ function SkillsSection({ resumeData }: ResumeSectionProps) {
         >
           Skills
         </p>
-        <div className="flex break-inside-avoid flex-wrap gap-2">
+        <div className="flex break-inside-avoid flex-wrap gap-2 text-gray-600">
           {skills.map((skill, index) => (
-            <Badge
-              key={index}
-              className="rounded-md bg-black text-white hover:bg-black"
-              style={{
-                backgroundColor: colorHex,
-                borderRadius:
-                  borderStyle === BorderStyles.SQUARE
-                    ? "0px"
-                    : borderStyle === BorderStyles.CIRCLE
-                      ? "9999px"
-                      : "8px",
-              }}
-            >
+            <Badge key={index} className="text-sm text-gray-600">
               {skill}
             </Badge>
           ))}

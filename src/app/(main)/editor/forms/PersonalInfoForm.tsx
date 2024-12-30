@@ -6,6 +6,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { EditorFormProps } from "@/lib/types";
@@ -28,6 +29,8 @@ export default function PersonalInfoForm({
       country: resumeData.country || "",
       phone: resumeData.phone || "",
       email: resumeData.email || "",
+      linkdin: resumeData.linkdin || "",
+      github: resumeData.github || "",
     },
   });
 
@@ -69,6 +72,7 @@ export default function PersonalInfoForm({
                       ref={photoInputRef}
                     />
                   </FormControl>
+
                   <Button
                     variant="secondary"
                     type="button"
@@ -83,6 +87,9 @@ export default function PersonalInfoForm({
                   </Button>
                 </div>
                 <FormMessage />
+                <FormDescription>
+                  Optional: Avoid adding photos for ATS-friendly resumes.
+                </FormDescription>
               </FormItem>
             )}
           />
@@ -176,6 +183,33 @@ export default function PersonalInfoForm({
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input {...field} type="email" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="github"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Github</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="linkdin"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Linkdin</FormLabel>
+                <FormControl>
+                  <Input {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
