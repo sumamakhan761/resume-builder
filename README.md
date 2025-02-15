@@ -19,6 +19,13 @@ A full-stack application for creating ATS-friendly resumes with a dynamic and us
 - **PDF Export:** Enables users to print or save resumes as professional-grade PDFs.
 - **Customizable Design:** Allows users to personalize their resume templates.
 
+
+## Demo
+
+https://github.com/user-attachments/assets/8c7c1bde-e637-44ce-a9a9-5ef7595fb401
+
+
+
 ## 📌 Installation & Setup
 
 1. **Clone the repository:**
