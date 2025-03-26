@@ -24,7 +24,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: sumamakhan/web-app:latest
+        tags: sumamakhan/resume-builder:latest
 
     - name: Verify Pushed Image
-      run: docker pull sumamakhan/web-app:latest
+      run: docker pull sumamakhan/resume-builder:latest
