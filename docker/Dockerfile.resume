@@ -6,6 +6,7 @@ WORKDIR /usr/src/app
 RUN apk add --no-cache openssl
 
 # Define build arguments
+ARG NODE_ENV
 ARG NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
 ARG CLERK_SECRET_KEY
 ARG POSTGRES_PRISMA_URL
