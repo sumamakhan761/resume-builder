@@ -18,11 +18,7 @@ jobs:
         username: ${{secrets.DOCKER_RESUME}}
         password: ${{secrets.DOCKER_RESUME_PASSWORD}}
 
-    - name: Build Docker image
-      run: |
-        docker build --build-arg NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${{secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}} --build-arg CLERK_SECRET_KEY=${{secrets.CLERK_SECRET_KEY}} --build-arg POSTGRES_PRISMA_URL=${{secrets.POSTGRES_PRISMA_URL}} --build-arg BLOB_READ_WRITE_TOKEN=${{secrets.BLOB_READ_WRITE_TOKEN}} -t sumamakhan/resume-builder:latest .
-
-    - name: Push Docker image
+    - name: Build and Push Docker image
       uses: docker/build-push-action@v2
       with:
         context: .
