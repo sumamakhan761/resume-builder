@@ -23,8 +23,6 @@ COPY prisma ./prisma
 
 RUN npm install --legacy-peer-deps
 
-RUN npx prisma generate
-
 COPY . .
 
 RUN npx prisma generate
