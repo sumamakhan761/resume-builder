@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import useDebounce from "@/hooks/useDebounce";
 import { ResumeValues } from "@/lib/validation";
@@ -59,33 +58,14 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
       } catch (error) {
         setIsError(true);
         console.error(error);
-        const { dismiss } = toast({
+        toast({
           variant: "destructive",
-          description: (
-            <div className="space-y-3">
-              <p>Could not save changes.</p>
-              <Button
-                variant="secondary"
-                onClick={() => {
-                  dismiss();
-                  save();
-                }}
-              >
-                Retry
-              </Button>
-            </div>
-          ),
+          description: "Could not save changes. Please try again.",
         });
       } finally {
         setIsSaving(false);
       }
     }
-
-    console.log(
-      "debouncedResumeData",
-      JSON.stringify(debouncedResumeData, fileReplacer),
-    );
-    console.log("lastSavedData", JSON.stringify(lastSavedData, fileReplacer));
 
     const hasUnsavedChanges =
       JSON.stringify(debouncedResumeData, fileReplacer) !==
@@ -107,6 +87,7 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
   return {
     isSaving,
     hasUnsavedChanges:
-      JSON.stringify(resumeData) !== JSON.stringify(lastSavedData),
+      JSON.stringify(resumeData, fileReplacer) !==
+      JSON.stringify(lastSavedData, fileReplacer),
   };
 }
