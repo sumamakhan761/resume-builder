@@ -11,7 +11,8 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
 
   const { toast } = useToast();
 
-  const debouncedResumeData = useDebounce(resumeData, 1500);
+  // Debounce autosave more aggressively to reduce work on each keystroke
+  const debouncedResumeData = useDebounce(resumeData, 4000);
 
   const [resumeId, setResumeId] = useState(resumeData.id);
 
@@ -74,15 +75,7 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
     if (hasUnsavedChanges && debouncedResumeData && !isSaving && !isError) {
       save();
     }
-  }, [
-    debouncedResumeData,
-    isSaving,
-    lastSavedData,
-    isError,
-    resumeId,
-    searchParams,
-    toast,
-  ]);
+  }, [debouncedResumeData, isSaving, lastSavedData, isError, resumeId]);
 
   return {
     isSaving,
